@@ -1,0 +1,120 @@
+import java.util.Scanner;
+
+// Class for ATM
+class ATM {
+    private double balance;
+
+    // Constructor
+    public ATM(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    // Method to display transaction history
+    public void displayTransactionHistory() {
+        System.out.println("Transaction History:");
+        // Logic to display transaction history
+    }
+
+    // Method to withdraw money
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawal successful. Current balance: " + balance);
+        } else {
+            System.out.println("Invalid amount or insufficient funds.");
+        }
+    }
+
+    // Method to deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposit successful. Current balance: " + balance);
+        } else {
+            System.out.println("Invalid amount.");
+        }
+    }
+
+    // Method to transfer money
+    public void transfer(double amount) {
+        if (amount > 0 && amount <= balance) {
+            // Logic to transfer money
+            System.out.println("Transfer successful. Current balance: " + balance);
+        } else {
+            System.out.println("Invalid amount or insufficient funds.");
+        }
+    }
+}
+
+// Main class
+public class ATMInterface {
+    public static void main(String[] args) {
+        // Initialize ATM with initial balance
+        ATM atm = new ATM(1000.0);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the ATM!");
+
+        // Dummy login - you can replace this with actual authentication logic
+        System.out.println("Enter User ID:");
+        String userId = scanner.nextLine();
+        System.out.println("Enter PIN:");
+        String pin = scanner.nextLine();
+
+        // Dummy authentication
+        if (!authenticate(userId, pin)) {
+            System.out.println("Invalid credentials. Exiting...");
+            return;
+        }
+
+        System.out.println("Login successful!");
+
+        // ATM functionalities
+        while (true) {
+            System.out.println("\nChoose an option:");
+            System.out.println("1. Transactions History");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Deposit");
+            System.out.println("4. Transfer");
+            System.out.println("5. Quit");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    atm.displayTransactionHistory();
+                    break;
+                case 2:
+                    System.out.println("Enter amount to withdraw:");
+                    double withdrawAmount = scanner.nextDouble();
+                    scanner.nextLine(); // Consume newline
+                    atm.withdraw(withdrawAmount);
+                    break;
+                case 3:
+                    System.out.println("Enter amount to deposit:");
+                    double depositAmount = scanner.nextDouble();
+                    scanner.nextLine(); // Consume newline
+                    atm.deposit(depositAmount);
+                    break;
+                case 4:
+                    System.out.println("Enter amount to transfer:");
+                    double transferAmount = scanner.nextDouble();
+                    scanner.nextLine(); // Consume newline
+                    atm.transfer(transferAmount);
+                    break;
+                case 5:
+                    System.out.println("Thank you for using the ATM. Goodbye!");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please choose again.");
+            }
+        }
+    }
+
+    // Dummy authentication method
+    private static boolean authenticate(String userId, String pin) {
+        // Dummy authentication logic - replace with actual logic
+        return userId.equals("user123") && pin.equals("1234");
+    }
+}
